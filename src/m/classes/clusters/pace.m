@@ -19,6 +19,7 @@ classdef pace
 		accountname     = 'gts-arobel3-atlas'; %group account name
 		codepath        = ''; %path to issm binaries
 		executionpath   = ''; %path for execution folder
+		etcpath		= ''; %path for etc folder
 	%}}}
 	end
 	methods
@@ -39,6 +40,7 @@ classdef pace
 			disp(sprintf('    time (run time per job in minutes): %i',cluster.time));
 			disp(sprintf('    codepath (directory with ISSM binaries): %s',cluster.codepath));
 			disp(sprintf('    executionpath (directory for the outputs): %s',cluster.executionpath));
+			disp(sprintf('	  etcpath (directory for environment.sh): %s', cluster.etcpath));
 			disp(sprintf('    accountname (PI account): %s',cluster.accountname));
 		end
 		%}}}
