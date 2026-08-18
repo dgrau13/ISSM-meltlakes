@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
+#include <cmath>
 //#include <gsl_cblas.h>
 #include "../classes.h"
 #include "../Inputs/TriaInput.h"
@@ -723,17 +724,17 @@ void       Tria::CalvingCrevasseDepth(){/*{{{*/
 			hurst_input->GetInputValue(&hurst,&gauss);
 			sigma_input->GetInputValue(&sigma,&gauss);
 			meltsupply_input->GetInputValue(&melt_supply,&gauss);
-			wd_star = sigma*(0.2-(0.12*pow(hurst,0.6)));
+			wd_star = sigma*(0.2-(0.12*std::pow(hurst,0.6)));
 			S  = melt_supply / wd_star;
-			water_depth[iv] = sigma*erf(0.27*S)*(0.9-(0.08*pow(hurst,0.6))-(0.72*erf(0.76*S)));
+			water_depth[iv] = sigma*std::erf(0.27*S)*(0.9-(0.08*std::pow(hurst,0.6))-(0.72*std::erf(0.76*S)));
 			}
 		else if(surface_hydrology_type==2){
 			hurst_input->GetInputValue(&hurst,&gauss);
 			sigma_input->GetInputValue(&sigma,&gauss);
 			meltsupply_input->GetInputValue(&melt_supply,&gauss);
-			wd_star = sigma*(0.2-(0.12*pow(hurst,0.6)));
+			wd_star = sigma*(0.2-(0.12*std::pow(hurst,0.6)));
 			S  = melt_supply / wd_star;
-			lake_depth[iv] = 0.6*sigma*erf(67*S)*(1-(0.41*pow(hurst,0.6)));
+			lake_depth[iv] = 0.6*sigma*std::erf(67*S)*(1-(0.41*std::pow(hurst,0.6)));
 			}
 		
 
@@ -781,14 +782,14 @@ void       Tria::CalvingCrevasseDepth(){/*{{{*/
 			if(surface_hydrology_type==0){
 				surface_crevasse[iv] = 2*s1 / (rho_ice*constant_g) + (rho_freshwater/rho_ice)*water_height;}
 			else if(surface_hydrology_type==1){
-				wd_star = sigma*(0.2-(0.12*pow(hurst,0.6)));
+				wd_star = sigma*(0.2-(0.12*std::pow(hurst,0.6)));
 				S  = melt_supply / wd_star;
-				water_depth[iv] = sigma*erf(0.27*S)*(0.9-(0.08*pow(hurst,0.6))-(0.72*erf(0.76*S)));
+				water_depth[iv] = sigma*std::erf(0.27*S)*(0.9-(0.08*std::pow(hurst,0.6))-(0.72*std::erf(0.76*S)));
 				surface_crevasse[iv] = 2*s1 / (rho_ice*constant_g) + (rho_freshwater/rho_ice)*water_depth[iv];}
 			else if(surface_hydrology_type==2){
-				wd_star = sigma*(0.2-(0.12*pow(hurst,0.6)));
+				wd_star = sigma*(0.2-(0.12*std::pow(hurst,0.6)));
 				S  = melt_supply / wd_star;
-				lake_depth[iv] = 0.6*sigma*erf(67*S)*(1-(0.41*pow(hurst,0.6)));
+				lake_depth[iv] = 0.6*sigma*std::erf(67*S)*(1-(0.41*std::pow(hurst,0.6)));
 				surface_crevasse[iv] = 2*s1 / (rho_ice*constant_g) + (rho_freshwater/rho_ice)*lake_depth[iv];}
 
 			/*Basal crevasse: sigma'_xx - rho_i g (H-d) - rho_w g (b+d) = 0*/
