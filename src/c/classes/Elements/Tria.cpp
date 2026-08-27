@@ -726,7 +726,7 @@ void       Tria::CalvingCrevasseDepth(){/*{{{*/
 			meltsupply_input->GetInputValue(&melt_supply,&gauss);
 			wd_star = sigma*(0.2-(0.12*std::pow(hurst,0.6)));
 			S  = melt_supply / wd_star;
-			water_depth[iv] = sigma*std::erf(0.27*S)*(0.9-(0.08*std::pow(hurst,0.6))-(0.72*std::erf(0.76*S)));
+			water_depth[iv] = 0.9*sigma*std::erf(0.27*S)*(1-(0.08*std::pow(hurst,0.6))-(0.72*std::erf(0.76*S)));
 			}
 		else if(surface_hydrology_type==2){
 			hurst_input->GetInputValue(&hurst,&gauss);
@@ -784,7 +784,7 @@ void       Tria::CalvingCrevasseDepth(){/*{{{*/
 			else if(surface_hydrology_type==1){
 				wd_star = sigma*(0.2-(0.12*std::pow(hurst,0.6)));
 				S  = melt_supply / wd_star;
-				water_depth[iv] = sigma*std::erf(0.27*S)*(0.9-(0.08*std::pow(hurst,0.6))-(0.72*std::erf(0.76*S)));
+				water_depth[iv] = 0.9*sigma*std::erf(0.27*S)*(1-(0.08*std::pow(hurst,0.6))-(0.72*std::erf(0.76*S)));
 				surface_crevasse[iv] = 2*s1 / (rho_ice*constant_g) + (rho_freshwater/rho_ice)*water_depth[iv];}
 			else if(surface_hydrology_type==2){
 				wd_star = sigma*(0.2-(0.12*std::pow(hurst,0.6)));
