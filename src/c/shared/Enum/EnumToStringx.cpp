@@ -511,6 +511,7 @@ const char* EnumToStringx(int en){
 		case SealevelchangeRunCountEnum : return "SealevelchangeRunCount";
 		case SealevelchangeTransitionsEnum : return "SealevelchangeTransitions";
 		case SealevelchangeRequestedOutputsEnum : return "SealevelchangeRequestedOutputs";
+		case SurfaceHydrologyTypeEnum : return "SurfaceHydrologyType";
 		case RotationalAngularVelocityEnum : return "RotationalAngularVelocity";
 		case RotationalEquatorialMoiEnum : return "RotationalEquatorialMoi";
 		case RotationalPolarMoiEnum : return "RotationalPolarMoi";
@@ -970,6 +971,7 @@ const char* EnumToStringx(int en){
 		case UGiaRateEnum : return "UGiaRate";
 		case GradientEnum : return "Gradient";
 		case GroundinglineHeightEnum : return "GroundinglineHeight";
+		case HurstEnum : return "Hurst";
 		case HydraulicPotentialEnum : return "HydraulicPotential";
 		case HydraulicPotentialOldEnum : return "HydraulicPotentialOld";
 		case HydrologyBasalFluxEnum : return "HydrologyBasalFlux";
@@ -1032,6 +1034,7 @@ const char* EnumToStringx(int en){
 		case InversionVelObsEnum : return "InversionVelObs";
 		case InversionVxObsEnum : return "InversionVxObs";
 		case InversionVyObsEnum : return "InversionVyObs";
+		case LakeDepthEnum : return "LakeDepth";
 		case LevelsetfunctionSlopeXEnum : return "LevelsetfunctionSlopeX";
 		case LevelsetfunctionSlopeYEnum : return "LevelsetfunctionSlopeY";
 		case LevelsetObservationEnum : return "LevelsetObservation";
@@ -1054,6 +1057,7 @@ const char* EnumToStringx(int en){
 		case MaterialsRheologyEsEnum : return "MaterialsRheologyEs";
 		case MaterialsRheologyEsbarEnum : return "MaterialsRheologyEsbar";
 		case MaterialsRheologyNEnum : return "MaterialsRheologyN";
+		case MeltSupplyEnum : return "MeltSupply";
 		case MeshScaleFactorEnum : return "MeshScaleFactor";
 		case MeshVertexonbaseEnum : return "MeshVertexonbase";
 		case MeshVertexonboundaryEnum : return "MeshVertexonboundary";
@@ -1163,6 +1167,7 @@ const char* EnumToStringx(int en){
 		case SedimentHeadTransientEnum : return "SedimentHeadTransient";
 		case SedimentHeadResidualEnum : return "SedimentHeadResidual";
 		case SedimentHeadStackedEnum : return "SedimentHeadStacked";
+		case SigmaEnum : return "Sigma";
 		case SigmaNNEnum : return "SigmaNN";
 		case SigmaVMEnum : return "SigmaVM";
 		case SmbAblationEnum : return "SmbAblation";
@@ -1432,6 +1437,7 @@ const char* EnumToStringx(int en){
 		case VzSSAEnum : return "VzSSA";
 		case WaterColumnOldEnum : return "WaterColumnOld";
 		case WatercolumnEnum : return "Watercolumn";
+		case WaterDepthEnum : return "WaterDepth";
 		case WaterfractionDrainageEnum : return "WaterfractionDrainage";
 		case WaterfractionDrainageIntegratedEnum : return "WaterfractionDrainageIntegrated";
 		case WaterfractionEnum : return "Waterfraction";
