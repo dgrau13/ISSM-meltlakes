@@ -9,14 +9,14 @@ classdef ccr
 	properties (SetAccess=public)
 		% {{{
 		name           = 'ccr'
-		login          = 'dgrau@vortex.ccr.buffalo.edu';
+		login          = '';
 		port           = 0;
 		cluster        = 'ub-hpc';% or faculty 
 		partition      = 'general-compute';
 		qos 	       = 'general-compute';
 		account        = '';
 		time           = 1*3600; %hr
-		numnodes .     = 1; %number of nodes
+		numnodes       = 1; %number of nodes
 		ntasks	       = 1; %number of tasks per node
 		cpuspertask    = 40;%number of cpus per task
 		memory	       = 1*1000; %GB
