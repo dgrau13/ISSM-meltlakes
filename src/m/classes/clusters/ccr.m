@@ -18,7 +18,7 @@ classdef ccr
 		time           = 1*3600; %hr
 		numnodes       = 1; %number of nodes
 		ntasks	       = 1; %number of tasks per node
-		cpuspertask    = 40;%number of cpus per task
+		cpuspertask    = 1;%number of cpus per task
 		memory	       = 1*1000; %GB
 		jobname	       = '';
 		modules        = {'ccrsoft/2023.01' 'cmake/3.22.1' 'matlab/2023b' 'gcc/11.2.0'};
