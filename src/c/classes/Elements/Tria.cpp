@@ -718,7 +718,6 @@ void       Tria::CalvingCrevasseDepth(){/*{{{*/
 
 		vx_input->GetInputValue(&vx,&gauss);
 		vy_input->GetInputValue(&vy,&gauss);
-		waterheight_input->GetInputValue(&water_height,&gauss);
 		s_xx_input->GetInputValue(&s_xx,&gauss);
 		s_xy_input->GetInputValue(&s_xy,&gauss);
 		s_yy_input->GetInputValue(&s_yy,&gauss);
