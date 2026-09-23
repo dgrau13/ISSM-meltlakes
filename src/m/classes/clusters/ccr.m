@@ -8,8 +8,8 @@
 classdef ccr
 	properties (SetAccess=public)
 		% {{{
-		name           = 'ccr'
-		login          = '';
+		name           = oshostname()
+		login          = 'dgrau@vortex.ccr.buffalo.edu';
 		port           = 0;
 		cluster        = 'ub-hpc';% or faculty 
 		partition      = 'general-compute';
@@ -19,7 +19,8 @@ classdef ccr
 		numnodes       = 1; %number of nodes
 		ntasks	       = 1; %number of tasks per node
 		cpuspertask    = 1;%number of cpus per task
-		memory	       = 1*1000; %GB
+        exclusive      = false;
+		mem 	       = 1*1000; %GB
 		jobname	       = '';
 		modules        = {'ccrsoft/2023.01' 'cmake/3.22.1' 'matlab/2023b' 'gcc/11.2.0'};
 		srcpath        = '/user/dgrau/ISSM-meltlakes';
@@ -27,6 +28,7 @@ classdef ccr
 		executionpath  = '/user/dgrau/ISSM-meltlakes/execution';
 		interactive    = 0;
 		bbftp          = 0;
+        email          = '';
 	end
 	%}}}
 	methods
@@ -53,7 +55,7 @@ classdef ccr
 			disp(sprintf('    numnodes: %i',cluster.numnodes));
 			disp(sprintf('	  ntasks: %i',cluster.ntasks));
 			disp(sprintf('    cpuspertask: %i',cluster.cpuspertask));
-			disp(sprintf('	  memory: %i',cluster.memory));
+			disp(sprintf('	  memory: %i',cluster.mem));
 			disp(sprintf('    jobname: %s',cluster.jobname));
 			disp(sprintf('    modules: %s',strjoin(cluster.modules,', ')));
 			disp(sprintf('    srcpath: %s',cluster.srcpath));
@@ -69,7 +71,7 @@ classdef ccr
 		end
 		%}}}
 		function md = checkconsistency(cluster,md,solution,analyses) % {{{
-			if cluster.cluster == 'ub_hpc'
+			if strcmpi(cluster.cluster,'ub_hpc')
 				if cluster.qos ~= cluster.partition
 					if ~ismember(cluster.qos,{'supporters','mri','nih'})
 						md = md.checkmessage('Value of qos should either match value of partition or be set to "supporters", "mri", or "nih"');
@@ -81,11 +83,11 @@ classdef ccr
 				queue_requirements_np=[64 64 56 64 64 64];
 
 			QueueRequirements(available_queues,queue_requirements_time,queue_requirements_np,cluster.partition,cluster.nprocs(),cluster.time)
-			elif cluster.cluster == 'faculty'
-				if cluster.account == ''
+            elseif strcmpi(cluster.cluster,'faculty')
+				if strcmpi(cluster.account,'')
 					md = md.checkmessage('please supply valid account when using the faculty cluster');
 				end
-				if cluster.partition ~= 'sophien' & cluster.qos ~= 'sophien' & cluster.account ~= 'sophien'
+				if strcmpi(cluster.partition,'sophien')==0 & strcmpi(cluster.qos,'sophien')==0 & strcmpi(cluster.account,sophien')==0
 					md = md.checkmessage('combination of partition and qos and account invalid');
 				end
 			else
@@ -109,7 +111,9 @@ classdef ccr
 			isvalgrind = md.debug.valgrind;
 
 			%checks
-			if(md.debug.gprof) disp('gprof not supported by cluster, ignoring...'); end
+			if(md.debug.gprof) 
+                disp('gprof not supported by cluster, ignoring...'); 
+            end
 
 			%write queuing script
 			fid=fopen(filename, 'w');
@@ -118,10 +122,10 @@ classdef ccr
 			fprintf(fid,'#SBATCH --time=%i\n',cluster.time*3600); %walltime is in seconds now converted to hours
 			fprintf(fid,'#SBATCH --ntasks=%i\n', cluster.ntasks);
 			fprintf(fid,'#SBATCH --cpus-per-task=%i\n',cluster.cpuspertask);
-			if cluster.cluster ~= 'faculty'
+			if strcmpi(cluster.cluster,'faculty')
 				fprintf('#SBATCH --constraint="[SAPPHIRE-RAPIDS-IB|ICE-LAKE-IB|CASCADE-LAKE-IB|EMERALD-RAPIDS-IB]"\n');
 			end
-			fprint(fid,'#SBATCH --mem=%i\n',cluster.memory);
+			fprint(fid,'#SBATCH --mem=%i\n',cluster.mem);
 			fprintf(fid,'#SBATCH --qos=%s\n',cluster.qos);
 			fprintf(fid,'#SBATCH --job-name=%s\n',cluster.jobname);
 			fprintf(fid,'#SBATCH --output= %s/%s/%s.outlog \n',cluster.executionpath,dirname,modelname);
@@ -188,19 +192,17 @@ classdef ccr
 			system(compressstring);
 
 			disp('uploading input file and queueing script');
-			if cluster.interactive==10
-				directory=[pwd() '/run/'];
-			elseif cluster.interactive
+			if cluster.interactive
 				directory=[cluster.executionpath '/Interactive' num2str(cluster.interactive)];
 			else 
 				directory=cluster.executionpath;
 			end
 
-			if cluster.bbftp
-				issmbbftpout(cluster.name,directory,cluster.login,cluster.port,cluster.numstreams,{[dirname '.tar.gz']});
-			else
-				issmscpout(cluster.name,directory,cluster.login,cluster.port,{[dirname '.tar.gz']});
-			end
+			% if cluster.bbftp
+			% 	issmbbftpout(cluster.name,directory,cluster.login,cluster.port,cluster.numstreams,{[dirname '.tar.gz']});
+			% else
+			% 	issmscpout(cluster.name,directory,cluster.login,cluster.port,{[dirname '.tar.gz']});
+			% end
 
 		end
 		%}}}
@@ -236,11 +238,11 @@ classdef ccr
 				directory=[cluster.executionpath '/Interactive' num2str(cluster.interactive) '/'];
 			end
 
-			if cluster.bbftp
-				issmbbftpin(cluster.name, cluster.login, cluster.port, cluster.numstreams, directory, filelist);
-			else
-				issmscpin(cluster.name,cluster.login,cluster.port,directory,filelist);
-			end
+			% if cluster.bbftp
+			% 	issmbbftpin(cluster.name, cluster.login, cluster.port, cluster.numstreams, directory, filelist);
+			% else
+			% 	issmscpin(cluster.name,cluster.login,cluster.port,directory,filelist);
+			% end
 
 		end %}}}
 	end
