@@ -678,7 +678,7 @@ void       Tria::CalvingCrevasseDepth(){/*{{{*/
 	Input* H_input           = this->GetInput(ThicknessEnum); _assert_(H_input);
 	Input* bed_input         = this->GetInput(BedEnum); _assert_(bed_input);
 	Input* surface_input     = this->GetInput(SurfaceEnum); _assert_(surface_input);
-   Input* sealevel_input    = this->GetInput(SealevelEnum); _assert_(sealevel_input);
+   	Input* sealevel_input    = this->GetInput(SealevelEnum); _assert_(sealevel_input);
 	Input* vx_input          = this->GetInput(VxEnum); _assert_(vx_input);
 	Input* vy_input          = this->GetInput(VxEnum); _assert_(vy_input);
 	Input* waterheight_input = this->GetInput(WaterheightEnum); _assert_(waterheight_input);
@@ -704,7 +704,7 @@ void       Tria::CalvingCrevasseDepth(){/*{{{*/
 		H_input->GetInputValue(&thickness,&gauss);
 		bed_input->GetInputValue(&bed,&gauss);
 		surface_input->GetInputValue(&surface,&gauss);
-      sealevel_input->GetInputValue(&sealevel,&gauss);
+      		sealevel_input->GetInputValue(&sealevel,&gauss);
 
 		vx_input->GetInputValue(&vx,&gauss);
 		vy_input->GetInputValue(&vy,&gauss);
@@ -768,7 +768,11 @@ void       Tria::CalvingCrevasseDepth(){/*{{{*/
       }
 		else {
 			/*Surface crevasse: sigma'_xx - rho_i g d + rho_fw g d_w = 0*/
-			surface_crevasse[iv] = 2*s1 / (rho_ice*constant_g) + (rho_freshwater/rho_ice)*water_height;
+			if(water_height>0 && s1>0){
+				surface_crevasse[iv] = 2*s1 / (rho_ice*constant_g) + (rho_freshwater/rho_ice)*thickness;}
+				
+			else{
+				surface_crevasse[iv] = 2*s1 / (rho_ice*constant_g) + (rho_freshwater/rho_ice)*water_height;}
 
 			/*Basal crevasse: sigma'_xx - rho_i g (H-d) - rho_w g (b+d) = 0*/
 			if(sealevel - bed>0.){
