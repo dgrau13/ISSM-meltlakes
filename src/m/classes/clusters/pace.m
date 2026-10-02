@@ -8,7 +8,7 @@
 classdef pace 
 	properties (SetAccess=public)
 	% {{{
-		name            = 'login-phoenix-slurm.pace.gatech.edu' %Phoenix cluster name
+		name            = 'login-phoenix.pace.gatech.edu' %Phoenix cluster name
 		login           = ''; %personal login
 		numnodes        = 1; %number of nodes requested
 		np              = 4; %number of processors per node
