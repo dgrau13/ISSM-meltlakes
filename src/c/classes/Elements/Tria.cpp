@@ -768,7 +768,7 @@ void       Tria::CalvingCrevasseDepth(){/*{{{*/
       }
 		else {
 			/*Surface crevasse: sigma'_xx - rho_i g d + rho_fw g d_w = 0*/
-			if(water_height>0 && s1>0){
+			if(water_height>0 && s2>0){
 				surface_crevasse[iv] = 2*s1 / (rho_ice*constant_g) + (rho_freshwater/rho_ice)*thickness;}
 				
 			else{
