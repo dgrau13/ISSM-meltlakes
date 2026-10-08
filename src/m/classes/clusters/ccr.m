@@ -179,7 +179,9 @@ classdef ccr
 		end
 		%}}}
 		function Download(cluster,dirname,filelist) % {{{
-			issmscpin(cluster.name,cluster.login,cluster.port,dirname,filelist);
+            % cluster_defaults.Download(cluster,dirname,filelist);
+            % directory = [cluster.executionpath '/' dirname '/'];
+			% issmscpin(cluster.name,cluster.login,cluster.port,[cluster.executionpath '/' dirname],filelist);
 		end %}}}
 	end
 end

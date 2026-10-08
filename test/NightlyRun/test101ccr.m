@@ -1,29 +1,20 @@
+%Steps & Load Only: 0 - Run Simulation, 1 - Compile Model Output 
+step = 1;loadonly=0;
 %Test Name: SquareShelfConstrainedStressSSA2d
+
+issm_dir = '/user/dgrau/ISSM-meltlakes';
+codepath = [issm_dir '/bin'];
+execpath = [issm_dir '/execution'];
+org = organizer('repository','','prefix','test101ccr','steps',step);
+
+mycluster = ccr('login','dgrau','numnodes',1,'ntasks',2,'cpuspertask',2,'time',1/30,'account','ghub','mem',2,'srcpath',issm_dir,'codepath',codepath,'executionpath',execpath,'jobname','Test101');
+
+if perform(org,'test101ccr')
 md=triangle(model(),'../Exp/Square.exp',50000.);
 md=setmask(md,'all','');
 md=parameterize(md,'../Par/SquareShelfConstrained.par');
 md=setflowequation(md,'SSA','all');
-md.cluster=generic('name',oshostname(),'np',2);
-
-if true
-    cluster=ccr;
-    cluster.login = 'dgrau';
-    cluster.numnodes =1;
-    cluster.ntasks = 2;
-    cluster.cpuspertask =2;
-    cluster.time =1/30;
-    cluster.partition = 'general-compute';
-    cluster.qos = 'general-compute';
-    cluster.account = 'ghub';
-    cluster.mem = 2;
-    cluster.jobname = 'Test101';
-    cluster.interactive=0; 
-    cluster.port=0;
-    cluster.srcpath = '/user/dgrau/ISSM-meltlakes';
-    cluster.codepath = '/user/dgrau/ISSM-meltlakes/bin';
-    cluster.executionpath = '/user/dgrau/ISSM-meltlakes/execution';
-    md.cluster=cluster;
-end
+md.cluster=mycluster;
 
 md.stressbalance.requested_outputs={'default','DeviatoricStressxx','DeviatoricStressyy','DeviatoricStressxy','MassFlux1','MassFlux2','MassFlux3','MassFlux4','MassFlux5','MassFlux6'};
 md.outputdefinition.definitions={...
@@ -35,7 +26,14 @@ md.outputdefinition.definitions={...
     massfluxatgate('name','MassFlux6','profilename',['../Exp/MassFlux6.exp'],'definitionstring','Outputdefinition6')...
     };
 
-md = solve(md,'Stressbalance');
+md = solve(md,'Stressbalance','runtimename', false,'loadonly',loadonly);
+if loadonly
+    md=loadresultsfromcluster(md);
+    savemodel(org,md);
+end
+end
+
+
 
 
 
