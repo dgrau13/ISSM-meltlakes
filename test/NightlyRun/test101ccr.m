@@ -9,9 +9,9 @@ if true
     cluster=ccr;
     cluster.login = 'dgrau';
     cluster.numnodes =1;
-    cluster.ntasks = 1;
+    cluster.ntasks = 2;
     cluster.cpuspertask =2;
-    cluster.time =1;
+    cluster.time =1/30;
     cluster.partition = 'general-compute';
     cluster.qos = 'general-compute';
     cluster.account = 'ghub';
