@@ -9,7 +9,7 @@ classdef ccr
         properties (SetAccess=public)
                 % {{{
                 name           = 'vortex.ccr.buffalo.edu';
-                login          = 'dgrau';
+                login          = '';
                 port           = 0;
                 cluster        = 'ub-hpc';% or faculty
                 partition      = 'general-compute';
@@ -23,9 +23,9 @@ classdef ccr
                 mem            = 1*1000; %GB
                 jobname        = '';
                 modules        = {'ccrsoft/2023.01' 'cmake/3.22.1' 'matlab/2023b' 'gcc/11.2.0'};
-                srcpath        = '/user/dgrau/ISSM-meltlakes';
-                codepath       = '/user/dgrau/ISSM-meltlakes/bin';
-                executionpath  = '/user/dgrau/ISSM-meltlakes/execution';
+                srcpath        = '';
+                codepath       = '';
+                executionpath  = '';
                 interactive    = 0;
                 bbftp          = 0;
         email          = '';
