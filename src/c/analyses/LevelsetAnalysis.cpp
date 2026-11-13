@@ -140,16 +140,16 @@ void LevelsetAnalysis::UpdateElements(Elements* elements,Inputs* inputs,IoModel*
 			iomodel->ConstantToInput(inputs,elements,0.,CalvingratexEnum,P1Enum);
 			iomodel->ConstantToInput(inputs,elements,0.,CalvingrateyEnum,P1Enum);
 			if(surfacehydrologytype==0){
-                                iomodel->FetchDataToInput(inputs,elements,"md.calving.water_height",WaterheightEnum);
-                        } else if(surfacehydrologytype==1){
-                                iomodel->FetchDataToInput(inputs,elements,"md.calving.hurst",HurstEnum);
-                                iomodel->FetchDataToInput(inputs,elements,"md.calving.sigma",SigmaEnum);
-                                iomodel->FetchDataToInput(inputs,elements,"md.calving.melt_supply",MeltSupplyEnum);
-                        } else if(surfacehydrologytype==2){
-                                iomodel->FetchDataToInput(inputs,elements,"md.calving.hurst",HurstEnum);
-                                iomodel->FetchDataToInput(inputs,elements,"md.calving.sigma",SigmaEnum);
-                                iomodel->FetchDataToInput(inputs,elements,"md.calving.melt_supply",MeltSupplyEnum);
-                        }
+                iomodel->FetchDataToInput(inputs,elements,"md.calving.water_height",WaterheightEnum);
+            } else if(surfacehydrologytype==1){
+                iomodel->FetchDataToInput(inputs,elements,"md.calving.hurst",HurstEnum);
+                iomodel->FetchDataToInput(inputs,elements,"md.calving.sigma",SigmaEnum);
+                iomodel->FetchDataToInput(inputs,elements,"md.calving.melt_supply",MeltSupplyEnum);
+            } else if(surfacehydrologytype==2){
+                iomodel->FetchDataToInput(inputs,elements,"md.calving.hurst",HurstEnum);
+                iomodel->FetchDataToInput(inputs,elements,"md.calving.sigma",SigmaEnum);
+                iomodel->FetchDataToInput(inputs,elements,"md.calving.melt_supply",MeltSupplyEnum);
+            }
 			break;
 		case CalvingPollardEnum:
 			break;

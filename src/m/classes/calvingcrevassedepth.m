@@ -42,7 +42,7 @@ classdef calvingcrevassedepth
                         self.water_height       = 0.;
                         self.hurst = 0.41;
                         self.sigma = 14.3;
-			self.melt_supply = 0;
+                        self.melt_supply = 0;
                         self.sigma = 14.3;
                         self.melt_supply = 0;
                 end % }}}
@@ -69,7 +69,7 @@ classdef calvingcrevassedepth
                         disp(sprintf('   Calving Pi parameters:'));
                         fielddisplay(self,'crevasse_opening_stress','0: stress only in the ice-flow direction, 1: max principal, 2: buttressing based');
                         fielddisplay(self,'crevasse_threshold','ratio of full thickness to calve (e.g. 0.75 is for 75% of the total ice thickness)');
-			fielddisplay(self,'surface_hydrology_type','0: default crevasse depth calving, 1: use mean water depth param to prescibe water_height, 2: use mean lake depth param to prescribe as water_height')
+                        fielddisplay(self,'surface_hydrology_type','0: default crevasse depth calving, 1: use mean water depth param to prescibe water_height, 2: use mean lake depth param to prescribe as water_height')
                         fielddisplay(self,'water_height','water height in the crevasse [m]');
                         fielddisplay(self,'hurst','Hurst exponent');
                         fielddisplay(self,'sigma','Roughness Amplitude [m]')
