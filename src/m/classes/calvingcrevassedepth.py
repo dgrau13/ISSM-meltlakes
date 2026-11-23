@@ -50,7 +50,7 @@ class calvingcrevassedepth(object):
         if self.surface_hydrology_type ==0:
             md = checkfield(md, 'fieldname', 'calving.water_height', 'NaN', 1, 'Inf', 1, 'timeseries', 1, '>=', 0)
         if self.surface_hydrology_type ==1:
-            md = checkfield(md, 'fieldname', 'calving.hurst', 'NaN', 1, 'size', [md.md.mesh.numberofvertices, 1],'>=',0,'<=',1)
+            md = checkfield(md, 'fieldname', 'calving.hurst', 'NaN', 1, 'size', [md.mesh.numberofvertices, 1],'>=',0,'<=',1)
             md = checkfield(md, 'fieldname', 'calving.sigma', 'NaN', 1, 'size', [md.mesh.numberofvertices, 1],'>=',0)
             md = checkfield(md, 'fieldname', 'calving.melt_supply', 'NaN', 1, 'Inf', 1, 'timeseries', 1, '>=',0)
         if self.surface_hydrology_type ==2:
